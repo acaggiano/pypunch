@@ -73,115 +73,28 @@
 				</div>
 			</div>
   			<div class="row">
+
+  			{% for project in all_projects %}
+
   				<div class="col-md-4">
 		  			<div class="card card-block">
 		  				<div class="row">
 		  					<div class="col-xs">
-								<h4 class="card-title">Project</h4>
+								<h4 class="card-title">{{ project.name }}</h4>
 							</div>
 						</div>
-						<h6 class="card-subtitle text-muted">created by You</h6>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
+						<h6 class="card-subtitle text-muted">created by {{ project.creator }}</h6>
+						{% for work in project.work_set.all %}
+						<p class="card-text">{{work.time_start|date:"m/d/y H:i:s"}} - {{work.time_end|date:"m/d/y H:i:s"}}</p>
+						{% endfor %}
 						<div class="text-xs-center">
 							<a href="#" class="btn btn-danger">Punch Out</a>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
-		  			<div class="card card-block">
-						<h4 class="card-title">Project</h4>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<div class="text-xs-center">
-							<a href="#" class="btn btn-success">Punch In</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-		  			<div class="card card-block">
-						<h4 class="card-title">Project</h4>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<div class="text-xs-center">
-							<a href="#" class="btn btn-success">Punch In</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-  				<div class="col-md-4">
-		  			<div class="card card-block">
-						<h4 class="card-title">Project</h4>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<div class="text-xs-center">
-							<a href="#" class="btn btn-success">Punch In</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-		  			<div class="card card-block">
-						<h4 class="card-title">Project</h4>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<div class="text-xs-center">
-							<a href="#" class="btn btn-success">Punch In</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-		  			<div class="card card-block">
-						<h4 class="card-title">Project</h4>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<div class="text-xs-center">
-							<a href="#" class="btn btn-success">Punch In</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-  				<div class="col-md-4">
-		  			<div class="card card-block">
-						<h4 class="card-title">Project</h4>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<div class="text-xs-center">
-							<a href="#" class="btn btn-success">Punch In</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-		  			<div class="card card-block">
-						<h4 class="card-title">Project</h4>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<div class="text-xs-center">
-							<a href="#" class="btn btn-success">Punch In</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-		  			<div class="card card-block">
-						<h4 class="card-title">Project</h4>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<p class="card-text">11/02/16 6:00 PM - 11/02/16 11:00 PM</p>
-						<div class="text-xs-center">
-							<a href="#" class="btn btn-success">Punch In</a>
-						</div>
-					</div>
-				</div>
-			</div>
+
+			{% endfor %}
+
 			<nav class="text-xs-center" aria-label="Page navigation">
 				<ul class="pagination">
 					<li class="page-item">
