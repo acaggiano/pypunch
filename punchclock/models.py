@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Puncher(models.Model):
     user = models.OneToOneField(User)
-
+    
     def __str__(self):
         """Returns string with name"""
         return self.user.get_username()
