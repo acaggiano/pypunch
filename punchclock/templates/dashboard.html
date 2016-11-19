@@ -86,7 +86,9 @@
 						</div>
 						<h6 class="card-subtitle text-muted">created by {{ project.creator }}</h6>
 						{% for work in project.work_set.all %}
+						{% if work.worker == user %}
 						<p class="card-text">{{work.time_start|date:"m/d/y H:i:s"}} - {{work.time_end|date:"m/d/y H:i:s"}}</p>
+						{% endif %}
 						{% endfor %}
 						<div class="text-xs-center">
 							<a href="#" class="btn btn-danger">Punch Out</a>

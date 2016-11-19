@@ -12,6 +12,6 @@ def dashboard(request):
 
     all_projects = list(user.projects_shared.all())
 
-    context = {'username': username, 'most_recent_punch': most_recent_punch,
+    context = {'user':user, 'username': username, 'most_recent_punch': most_recent_punch,
                'project_recent_punch': project_recent_punch, 'all_projects': all_projects}
     return render(request, 'dashboard.html', context)
