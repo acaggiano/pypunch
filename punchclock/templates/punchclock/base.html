@@ -17,17 +17,16 @@
             <div class="nav navbar-nav">
                 <a class="nav-item nav-link" href="#"><i class="material-icons">menu</i></a>
             </div>
-            <a class="navbar-brand" href="#">PyPunch</a>
+            <a class="navbar-brand" href="{% url 'punchclock:index' %}">PyPunch</a>
             <div class="nav navbar-nav float-xs-right">
-                <a class="nav-item nav-link" href="#"><i class="material-icons">add</i></a>
-                <a class="nav-item nav-link" href="#"><i class="material-icons">star</i></a>
-                <a class="nav-item nav-link" 
-                {% if user.is_authenticated %} 
-                    href="{% url 'users:logout' %}"
+                {% if user.is_authenticated %}
+                <a class="nav-item nav-link" href="#" data-toggle="tooltip" data-placement="bottom" title="Add Project"><i class="material-icons">add</i></a>
+                <a class="nav-item nav-link" href="#" data-toggle="tooltip" data-placement="bottom" title="View Favorites"><i class="material-icons">star</i></a>
+                <a class="nav-item nav-link" href="{% url 'users:logout' %}" data-toggle="tooltip" data-placement="bottom" title="Log Out"><i class="material-icons">face</i></a>  
                 {% else %} 
-                    href="{% url 'users:login' %}" 
-                {% endif %}><i class="material-icons">face</i></a>
-                <a class="nav-item nav-link" href="#"><i class="material-icons">info</i></a>
+                    <a class="nav-item nav-link" href="{% url 'users:login' %}" data-toggle="tooltip" data-placement="bottom" title="Log In"><i class="material-icons">face</i></a>  
+                {% endif %}
+                <a class="nav-item nav-link" href="#"  data-toggle="tooltip" data-placement="bottom" title="Info"><i class="material-icons">info</i></a>
             </div>
         </nav>
         <section class="container">
@@ -43,8 +42,9 @@
 
         <script type="text/javascript">
             $(function () {
-                $('[data-toggle="popover"]').popover({ html : true })
-            })
+                $('[data-toggle="popover"]').popover({ html : true });
+                $('[data-toggle="tooltip"]').tooltip(); 
+            });
         </script>
     </body>
 </html>
