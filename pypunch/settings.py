@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     #My apps
     'punchclock.apps.PunchclockConfig',
+    'users',
 ]
 
 MIDDLEWARE = [

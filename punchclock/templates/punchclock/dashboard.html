@@ -1,0 +1,102 @@
+{% extends "punchclock/base.html" %}
+
+{% block header %}
+<article class="xs-col-12">
+	<div id="accordion" role="tablist" aria-multiselectable="true">
+		<div class="card">
+			<div class="card-header" role="tab" id="headingOne">
+				<div class="row">
+					<div class="col-xs">
+					<h5 class="mb-0">Hello, {{username}}!</h5>
+					</div>
+					<div class="col-xs pull-right text-xs-right">
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><i class="material-icons">expand_more</i></a>
+					</div>
+				</div>
+			</div>
+
+			<div id="collapseOne" class="collapse in" role="tabpanel" aria-labelledby="headingOne">
+				<div class="card-block">
+				<ul>
+					<li>Most recent punch: {{most_recent_punch.project.name}} | {{most_recent_punch.time_start}}</li>
+					<li>Most recent punch on your projects: {{project_recent_punch}}</li>
+					<li>Most recent project shared with you: {{most_recent_share.creator}} | {{most_recent_share}}</li>
+				</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</article>
+{% endblock header %}
+{% block content %}
+<article>
+	<div class="row">
+		<div class="col-xs">
+			<h2>Projects</h2>
+		</div>
+		<div class="col-xs text-xs-right">
+			<a href="#"><i class="material-icons">add</i></a>
+			<a href="#" data-toggle="popover" title="Sort By" data-placement="left" 
+			data-content='
+			<div class="dropdown open">
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sorting Methods
+				</button>
+				<div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
+				<a class="dropdown-item" href="#">Latest Punch</a>
+				<a class="dropdown-item" href="#">Latest Created</a>
+				<a class="dropdown-item" href="#">Name</a>
+				</div>
+			</div>
+			'>
+			<i class="material-icons" >sort</i></a>
+		</div>
+	</div>
+	<div class="row">
+
+	{% for project in all_projects %}
+
+		<div class="col-md-4">
+			<div class="card card-block">
+				<div class="row">
+					<div class="col-xs">
+					<h4 class="card-title">{{ project.name }}</h4>
+				</div>
+			</div>
+			<h6 class="card-subtitle text-muted">created by {{ project.creator }}</h6>
+			{% for work in project.work_set.all %}
+			{% if work.worker == user %}
+			<p class="card-text">{{work.time_start|date:"m/d/y H:i:s"}} - {{work.time_end|date:"m/d/y H:i:s"}}</p>
+			{% endif %}
+			{% endfor %}
+			<div class="text-xs-center">
+				<a href="#" class="btn btn-danger">Punch Out</a>
+			</div>
+		</div>
+	</div>
+
+	{% endfor %}
+	</div>
+
+<nav class="text-xs-center" aria-label="Page navigation">
+	<ul class="pagination">
+		<li class="page-item">
+			<a class="page-link" href="#" aria-label="Previous">
+			<span aria-hidden="true">&laquo;</span>
+			<span class="sr-only">Previous</span>
+			</a>
+		</li>
+		<li class="page-item"><a class="page-link" href="#">1</a></li>
+		<li class="page-item"><a class="page-link" href="#">2</a></li>
+		<li class="page-item"><a class="page-link" href="#">3</a></li>
+		<li class="page-item"><a class="page-link" href="#">4</a></li>
+		<li class="page-item"><a class="page-link" href="#">5</a></li>
+		<li class="page-item">
+			<a class="page-link" href="#" aria-label="Next">
+			<span aria-hidden="true">&raquo;</span>
+			<span class="sr-only">Next</span>
+			</a>
+		</li>
+	</ul>
+</nav>
+</article>
+{% endblock content %}
