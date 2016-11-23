@@ -18,9 +18,9 @@
 			<div id="collapseOne" class="collapse in" role="tabpanel" aria-labelledby="headingOne">
 				<div class="card-block">
 				<ul>
-					<li>Most recent punch: {{most_recent_punch.project.name}} | {{most_recent_punch.time_start}}</li>
+					<li>Most recent punch: {% if most_recent_punch != None %} {{most_recent_punch.project.name}} | {{most_recent_punch.time_start}} {% else %} No Punches yet! {% endif %}</li>
 					<li>Most recent punch on your projects: {{project_recent_punch}}</li>
-					<li>Most recent project shared with you: {{most_recent_share.creator}} | {{most_recent_share}}</li>
+					<li>Most recent project shared with you: {% if most_recent_share != None %}{{most_recent_share.creator}} | {% endif %} {{most_recent_share}} </li>
 				</ul>
 				</div>
 			</div>
@@ -73,6 +73,9 @@
 			</div>
 		</div>
 	</div>
+
+	{% empty %}
+	<p>You don't have any projects yet!</p>
 
 	{% endfor %}
 	</div>
