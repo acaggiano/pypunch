@@ -33,3 +33,11 @@ def dashboard(request):
                'all_projects': all_projects
                }
     return render(request, 'punchclock/dashboard.html', context)
+
+@login_required
+def projects(request, project_id):
+    """Create a page for a project"""
+    project = Project.objects.get(id=project_id)
+    works = project.work_set.order_by('time_start')
+    context = {'project': project, 'works': works}
+    return render(request, 'punchclock/project.html', context)

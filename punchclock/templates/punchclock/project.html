@@ -1,0 +1,13 @@
+{% extends 'punchclock/base.html' %}
+
+{% block header %}
+<h2>{{project}}</h2>
+{% endblock header %}
+
+{% block content %}
+<ul>
+{% for work in works %}
+    <li>{{ work }}</li>
+{% endfor %}
+</ul>
+{% endblock content %}
