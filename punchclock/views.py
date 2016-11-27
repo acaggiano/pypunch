@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 from .models import Project, Profile, Work
@@ -17,7 +18,7 @@ def index(request):
 @login_required
 def dashboard(request):
     user = request.user
-    username = user.__str__()
+    username = user.__str__().capitalize()
     try:
         most_recent_punch = user.profile.work_set.all().latest('time_start')
     except Work.DoesNotExist:
@@ -33,6 +34,17 @@ def dashboard(request):
         most_recent_share = None
     
     all_projects = Project.objects.filter(creator=request.user.profile).order_by('created')
+    paginator = Paginator(all_projects, 3)
+
+    page = request.GET.get('page')
+    try:
+        all_projects = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page
+        all_projects = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range, deliver last page
+        all_projects = paginator.page(paginator.num_pages)
 
     context = {'user':user, 'username': username, 'most_recent_punch': most_recent_punch,
                'project_recent_punch': project_recent_punch, 
