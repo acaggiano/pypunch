@@ -1,0 +1,14 @@
+{% extends "punchclock/base.html" %}
+
+{% block header %}
+<h2>Edit project:</h2>
+{% endblock header %}
+
+{% block content %}
+<form action="{% url 'punchclock:edit_project' project.id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary" name="submit">save</button>
+</form>
+
+{% endblock content %}

@@ -1,10 +1,12 @@
 {% extends 'punchclock/base.html' %}
 
 {% block header %}
-<h2>{{project}}</h2>
+<h2>{{project}}<a href="{% url 'punchclock:edit_project' project.id %}" data-toggle="tooltip" data-placement="bottom" title="Edit Project"><i class="material-icons">edit</i></a></h2>
+<h6>created: {{project.created}}</h6>
 {% endblock header %}
 
 {% block content %}
+<h3>Works</h3>
 <ul>
 {% for work in works %}
     <li>{{ work }}</li>

@@ -66,3 +66,20 @@ def new_project(request):
 
     context = {'form': form}
     return render(request, 'punchclock/new_project.html', context)
+
+@login_required
+def edit_project(request, project_id):
+    """Edit existing project"""
+    project = Project.objects.get(id=project_id)
+
+    if request.method != 'POST':
+        form = ProjectForm(instance=project)
+
+    else:
+        form = ProjectForm(instance=project, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('punchclock:projects', args=[project_id]))
+
+    context = {'project': project, 'form': form}
+    return render(request, 'punchclock/edit_project.html', context)
