@@ -92,7 +92,13 @@
 			</li>
         {% endif %}
 		{% for page in all_projects.paginator.page_range %}
-		<li class="page-item"><a class="page-link" href="?page={{ page }}">{{page}}</a></li>
+		<li class="page-item"><a class="page-link" href="?page={{ page }}">
+			{% if all_projects.number == page %}
+			<strong><u>{{page}}</u></strong>
+			{% else %}
+				{{page}}
+			{% endif %}
+		</a></li>
 		{% endfor %}
 
         {% if all_projects.has_next %}
