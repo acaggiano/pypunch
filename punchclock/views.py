@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+import datetime
 
 from .models import Project, Profile, Work
 from .forms import ProjectForm
@@ -95,3 +95,21 @@ def edit_project(request, project_id):
 
     context = {'project': project, 'form': form}
     return render(request, 'punchclock/edit_project.html', context)
+
+def punch(request):
+    user = request.user
+    project = request.POST.get("project","").replace("project-btn-","")
+    this_project = Project.objects.get(pk=project)
+    punch_status = request.POST.get("punchstatus","")
+
+    if(punch_status == "Out"):
+        user_work =  Work.objects.filter(worker__user=user,project__id=project).latest('time_start')
+        user_work.time_end = datetime.datetime.now()
+        user_work.save()
+    else:
+        new_work = Work.objects.create(worker=user.profile,
+                                       project=this_project,
+                                       time_start = datetime.datetime.now()
+        )
+
+    return HttpResponse(this_project)
